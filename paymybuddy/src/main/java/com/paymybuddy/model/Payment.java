@@ -32,13 +32,16 @@ public class Payment {
 	private String description;
 	
 	@Column(name = "amount")
-	private float amount;
+	private Double amount;
+	
+	@Column(name = "company_fee")
+	private Double companyFee;
 
 	
 	public Payment() {};
-	
-	public Payment(Integer paymentId, Integer debitorId, Integer creditorId, LocalDateTime datetime,
-			String description, float amount) {
+
+	public Payment(Integer paymentId, Integer debitorId, Integer creditorId, LocalDateTime datetime, String description,
+			Double amount, Double companyFee) {
 		super();
 		this.paymentId = paymentId;
 		this.debitorId = debitorId;
@@ -46,6 +49,7 @@ public class Payment {
 		this.datetime = datetime;
 		this.description = description;
 		this.amount = amount;
+		this.companyFee = companyFee;
 	}
 
 	@Override
@@ -57,15 +61,16 @@ public class Payment {
 		if (getClass() != obj.getClass())
 			return false;
 		Payment other = (Payment) obj;
-		return Float.floatToIntBits(amount) == Float.floatToIntBits(other.amount)
+		return Objects.equals(amount, other.amount) && Objects.equals(companyFee, other.companyFee)
 				&& Objects.equals(creditorId, other.creditorId) && Objects.equals(datetime, other.datetime)
 				&& Objects.equals(debitorId, other.debitorId) && Objects.equals(description, other.description)
 				&& Objects.equals(paymentId, other.paymentId);
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ID:"+paymentId+", debitorId:"+debitorId+", creditorId:"+creditorId+", datetime:"+datetime+", description:"+description+", amount:"+amount;
+		return "ID:"+paymentId+", debitorId:"+debitorId+", creditorId:"+creditorId
+				+", datetime:"+datetime+", description:"+description+", amount:"+amount+", company fee:"+companyFee;
 	}
 
 	public Integer getPaymentId() {
@@ -88,8 +93,12 @@ public class Payment {
 		return description;
 	}
 
-	public float getAmount() {
+	public Double getAmount() {
 		return amount;
+	}
+	
+	public Double getCompanyFee() {
+		return companyFee;
 	}
 
 }
