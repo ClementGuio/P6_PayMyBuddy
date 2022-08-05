@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.paymybuddy.util.PayMyBuddyUtil.ChargeFeesUtil;
 
 @Entity
 @Table(name = "account")
@@ -68,6 +69,20 @@ public class Account {
 		return "ID:"+accountId+", Email:"+email+", Pword:"+password+", balance:"+balance+", firstname:"+firstname+", lastname:"+lastname;
 	}
 	
+	//Methods
+	public boolean hasBalanceToPay(Double amount) {
+		return amount <= balance;
+	}
+	
+	public void withdrawMoney(Double amount) {
+		balance -= amount;
+	}
+	
+	public void addMoney(Double amount) {
+		balance += amount;
+	}
+	
+	//Getters
 	public Integer getUserId() {
 		return accountId;
 	}
