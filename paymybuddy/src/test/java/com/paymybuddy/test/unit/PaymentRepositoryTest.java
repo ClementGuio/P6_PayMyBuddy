@@ -35,11 +35,10 @@ public class PaymentRepositoryTest {
 	//TODO : créer données de test cohérentes
 	@Test
 	public void findAllTest() {
-		Payment a1 = new Payment(1000001,1000001,1000002,LocalDateTime.of(2020, 1, 1, 1, 0),null,Float.valueOf(5));
-		Payment a2 = new Payment(1000002,1000002,1000001,LocalDateTime.of(2020, 1, 1, 1, 0),null,Float.valueOf(5));
-		
-		Iterable<Payment> transactions = repo.findAll();
-		assertThat(transactions).contains(a1,a2);
+		Payment a1 = new Payment(1000001,1000001,1000002,LocalDateTime.of(2020, 1, 1, 1, 0),null,Double.valueOf(5),Double.valueOf(1));
+		Payment a2 = new Payment(1000002,1000002,1000001,LocalDateTime.of(2020, 1, 1, 1, 0),null,Double.valueOf(5),Double.valueOf(1));
+		Iterable<Payment> payments = repo.findAll();
+		assertThat(payments).contains(a1,a2);
 	}
 	
 	@Test
