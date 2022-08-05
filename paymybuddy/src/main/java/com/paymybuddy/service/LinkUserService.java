@@ -35,5 +35,10 @@ public class LinkUserService {
 	public Iterable<LinkUser> getLinkUsersWithFriendId(Integer friendId){
 		return repo.findByFriendId(friendId);
 	}
+	
+	//Supprimer un ami
+	public void removeLinkUser(LinkUser linkUser) {
+		repo.delete(linkUser);
+	}
 
 }
