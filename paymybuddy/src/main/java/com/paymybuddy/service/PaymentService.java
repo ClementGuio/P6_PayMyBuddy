@@ -22,7 +22,7 @@ public class PaymentService {
 		return repo.findById(id);
 	}
 	
-	public void addPayment(Payment payment) {
+	public void saveOrUpdatePayment(Payment payment) {
 		repo.save(payment);
 	}
 	

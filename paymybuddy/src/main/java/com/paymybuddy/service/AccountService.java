@@ -23,8 +23,8 @@ public class AccountService {
 		return repo.findById(Id);
 	}
 	
-	public void addAccount(Account account) {
-		repo.save(account);
+	public Account saveOrUpdateAccount(Account account) {
+		return repo.save(account); 
 	}
 	
 	public Optional<Account> getAccountWithEmail(String email) {
