@@ -1,8 +1,10 @@
 package com.paymybuddy.service;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.paymybuddy.exception.InsufficientBalanceException;
 import com.paymybuddy.exception.NegativeAmountException;
@@ -10,6 +12,7 @@ import com.paymybuddy.model.Account;
 import com.paymybuddy.model.Payment;
 import com.paymybuddy.util.PayMyBuddyUtil.ChargeFeesUtil;
 
+@Service
 public class PaymentManager {
 	
 	@Autowired
@@ -23,13 +26,17 @@ public class PaymentManager {
 		if (!isPossiblePayment(debitor,amount)) {
 			throw new InsufficientBalanceException("Insufficient debitor's balance to pay");
 		}
+		
 		Payment payment = executePayment(debitor, creditor, description,amount);
 		updateBD(debitor,creditor,payment);
 		
 		return payment;
 	}
 	
-	public boolean isPossiblePayment(Account debitor, Double amount) {
+	public boolean isPossiblePayment(Account debitor, Double amount) throws NegativeAmountException{
+		if (amount<0) {
+			throw new NegativeAmountException("You cannot pay negative amounts.");
+		}
 		return debitor.hasBalanceToPay(amount);
 	}
 	
