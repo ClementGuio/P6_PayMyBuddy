@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.paymybuddy.util.PayMyBuddyUtil.ChargeFeesUtil;
-
 @Entity
 @Table(name = "account")
 public class Account {
@@ -39,7 +37,16 @@ public class Account {
 	
 	
 	public Account() {};
-	
+	//TODO :virer les id des constructeurs
+	/**
+	 * 
+	 * @param accountId
+	 * @param email
+	 * @param password
+	 * @param balance
+	 * @param firstname
+	 * @param lastname
+	 */
 	public Account(Integer accountId, String email, String password, Double balance, String firstname, String lastname) {
 		super();
 		this.accountId = accountId;
@@ -59,7 +66,7 @@ public class Account {
 		if (getClass() != obj.getClass())
 			return false;
 		Account other = (Account) obj;
-		return Objects.equals(accountId, other.accountId) && Objects.equals(balance, other.balance)
+		return /*Objects.equals(accountId, other.accountId) && */Objects.equals(balance, other.balance)
 				&& Objects.equals(email, other.email) && Objects.equals(firstname, other.firstname)
 				&& Objects.equals(lastname, other.lastname) && Objects.equals(password, other.password);
 	}

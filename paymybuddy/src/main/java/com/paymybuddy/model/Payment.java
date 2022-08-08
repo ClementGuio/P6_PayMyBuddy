@@ -39,7 +39,17 @@ public class Payment {
 
 	
 	public Payment() {};
-
+	//TODO :virer les id des constructeurs
+	/**
+	 * 
+	 * @param paymentId
+	 * @param debitorId
+	 * @param creditorId
+	 * @param datetime
+	 * @param description
+	 * @param amount
+	 * @param companyFee
+	 */
 	public Payment(Integer paymentId, Integer debitorId, Integer creditorId, LocalDateTime datetime, String description,
 			Double amount, Double companyFee) {
 		super();
@@ -63,8 +73,8 @@ public class Payment {
 		Payment other = (Payment) obj;
 		return Objects.equals(amount, other.amount) && Objects.equals(companyFee, other.companyFee)
 				&& Objects.equals(creditorId, other.creditorId) && Objects.equals(datetime, other.datetime)
-				&& Objects.equals(debitorId, other.debitorId) && Objects.equals(description, other.description)
-				&& Objects.equals(paymentId, other.paymentId);
+				&& Objects.equals(debitorId, other.debitorId) && Objects.equals(description, other.description);
+				//&& Objects.equals(paymentId, other.paymentId);
 	}
 
 	@Override
