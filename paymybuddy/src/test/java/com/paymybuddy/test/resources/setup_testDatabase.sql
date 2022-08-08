@@ -1,8 +1,20 @@
-INSERT INTO account(id,email,pword,firstname,lastname) VALUES(1000001,"one@email.com","motdepasse","firstname","lastname");
-INSERT INTO account(id,email,pword,firstname,lastname) VALUES(1000002,"two@email.com","motdepasse","firstname","lastname");
+ALTER TABLE account AUTO_INCREMENT=1000001;
 
-INSERT INTO link_user(id,id_account,id_friend) VALUES(1000001,1000001,1000002);
-INSERT INTO link_user(id,id_account,id_friend) VALUES(1000002,1000002,1000001);
+INSERT INTO account(email,pword,balance,firstname,lastname) VALUES("one@email.com","motdepasse",100.0,"firstname","lastname");
+INSERT INTO account(email,pword,balance,firstname,lastname) VALUES("two@email.com","motdepasse",100.0,"firstname","lastname");
+INSERT INTO account(email,pword,balance,firstname,lastname) VALUES("three@email.com","motdepasse",100.0,"firstname","lastname");
 
-INSERT INTO payment(id,id_debitor,id_creditor,pay_datetime,amount,company_fee) VALUES(1000001,1000001,1000002,'20200101',5.0,1.0);
-INSERT INTO payment(id,id_debitor,id_creditor,pay_datetime,amount,company_fee) VALUES(1000002,1000002,1000001,'20200101',5.0,1.0);
+ALTER TABLE link_user AUTO_INCREMENT=1000001;
+
+INSERT INTO link_user(id_account,id_friend) VALUES(1000001,1000002);
+INSERT INTO link_user(id_account,id_friend) VALUES(1000002,1000001);
+INSERT INTO link_user(id_account,id_friend) VALUES(1000003,1000001);
+INSERT INTO link_user(id_account,id_friend) VALUES(1000003,1000002);
+
+ALTER TABLE payment AUTO_INCREMENT=1000001;
+
+INSERT INTO payment(id_debitor,id_creditor,pay_datetime,amount,company_fee) VALUES(1000001,1000002,'20200101',5.0,1.0);
+INSERT INTO payment(id_debitor,id_creditor,pay_datetime,amount,company_fee) VALUES(1000002,1000001,'20200101',5.0,1.0);
+INSERT INTO payment(id_debitor,id_creditor,pay_datetime,amount,company_fee) VALUES(1000003,1000001,'20200101',5.0,1.0);
+INSERT INTO payment(id_debitor,id_creditor,pay_datetime,amount,company_fee) VALUES(1000003,1000002,'20200101',5.0,1.0);
+
