@@ -24,7 +24,7 @@ import com.paymybuddy.service.PaymentService;
 import com.paymybuddy.util.PayMyBuddyUtil.ChargeFeesUtil;
 
 public class PaymentManagerTest {
-
+	//TODO: mock des trucs
 	@Mock
 	AccountService accountService;
 	
@@ -65,17 +65,25 @@ public class PaymentManagerTest {
 	}
 	
 	@Test
-	public void isPossiblePaymentTest() {
+	public void isPossiblePaymentTest() throws NegativeAmountException{
 		Account debitor = new Account(1,"debitor@email.com","pword",Double.valueOf(10),"firstname","lastname");
 		
 		assertTrue(manager.isPossiblePayment(debitor, Double.valueOf(5.5)));
 	}
 	
 	@Test
-	public void isNotPossiblePayment() {
+	public void isNotPossiblePayment() throws NegativeAmountException {
 		Account debitor = new Account(1,"debitor@email.com","pword",Double.valueOf(5.5),"firstname","lastname");
 		
 		assertFalse(manager.isPossiblePayment(debitor, Double.valueOf(10)));		
 	}
+	
+	@Test
+	public void isNotPossibleWithNegativeAmountPayment() throws NegativeAmountException {
+		Account debitor = new Account(1,"debitor@email.com","pword",Double.valueOf(5.5),"firstname","lastname");
+		
+		assertThrows(NegativeAmountException.class,() -> manager.isPossiblePayment(debitor, Double.valueOf(-1)));		
+	}
+	
 	
 }
