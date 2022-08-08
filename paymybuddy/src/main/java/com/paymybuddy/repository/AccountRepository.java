@@ -14,4 +14,6 @@ public interface AccountRepository extends CrudRepository<Account,Integer>{
 	public Optional<Account> findByEmail(String email);
 	
 	public Iterable<Account> findByFirstnameAndLastname(String firstname, String lastname);
+	
+	public void deleteByEmail(String email);
 }
