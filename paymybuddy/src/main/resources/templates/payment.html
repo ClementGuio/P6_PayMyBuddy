@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title>PayMyBuddy App</title>
+        <title>PayMyBuddy App - Payment</title>
         <meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
     	  
@@ -15,21 +15,24 @@
         	<span id="logo">PayMyBuddy</span>
         </header>
         
-        <div>Your balance : <span th:text="${account.balance}">Your balance</span> euros</div>
-        
-        <button type="button" th:onclick="|window.location.href='/payment'|">Make a payment</button>
-        <button type="button" th:onclick="|window.location.href='/depositOrWithdraw'|">Deposit/Withdraw money</button>
-		
-		<!-- Form to add friend connection -->
-        <form th:action="@{/user/addconnection}" th:object="${linkUserForm}" method="post" >
-  			<div class="form-group">
-    			<label for="inputEmail">Email address</label>
-    			<input th:field="*{email}" type="text" class="form-control my-2 mx-2" placeholder="Enter email">
-    			<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</span>
-  			</div>
-  			<button type="submit" class="btn btn-primary">Add Connection</button>
+		<!-- Form to make a payment -->
+		<form th:action="@{/executePayment}" th:object="${paymentForm}" method="post" >
+			<select class="form-select" th:field="*{creditorEmail}" >
+				<option value="0">Select friend</option>
+  				<option th:each="creditor : ${friends}"
+  						th:value=${creditor.email} 
+  						th:text="${creditor.firstname + ' ' + creditor.lastname}"></option>
+			</select>
+			<span th:if="${#fields.hasErrors('creditorEmail')}" th:errors="*{creditorEmail}">Name Error</span>
+			
+			<input type="text" th:field="*{description}" placeholder="Enter a description">
+			<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Name Error</span>
+			
+			<input type="number" th:field="*{amount}" placeholder="Choose ammount">
+			<span th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Name Error</span>
+			
+			<input name="Execute" type="submit">
 		</form>
-		
 		<!-- Payment history -->	
 		<table class="table">
 			<thead class="thead-light">
@@ -51,7 +54,6 @@
 				</tr>
 			</tbody>
 		</table>
-		
 		
     </body>
 </html>

@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+
+import paymybuddy.exception.InsufficientBalanceException;
 import paymybuddy.exception.NegativeAmountException;
 import paymybuddy.model.Account;
 import paymybuddy.model.Payment;
@@ -37,7 +39,7 @@ public class PaymentManagerTest {
 	}
 	
 	@Test
-	public void executePaymentTest() throws NegativeAmountException{
+	public void executePaymentTest() throws NegativeAmountException, InsufficientBalanceException{
 		Account debitor = new Account(1,"debitor@email.com","pword",Double.valueOf(10),"firstname","lastname");
 		Account creditor = new Account(2,"creditor@email.com","pword",Double.valueOf(10),"firstname","lastname");
 		Double amount = Double.valueOf(5);

@@ -11,4 +11,6 @@ public interface LinkUserRepository extends CrudRepository<LinkUser,Integer>{
 	Iterable<LinkUser> findByAccountId(Integer accountId);
 	
 	Iterable<LinkUser> findByFriendId(Integer friendId);
+	
+	boolean existsByAccountIdAndFriendId(Integer accountId, Integer friendId);
 }

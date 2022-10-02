@@ -27,6 +27,8 @@ public class PaymentManager {
 	@Autowired 
 	PaymentService paymentService;
 	
+	//TODO: revoir la gestion des exceptions
+	
 	public Payment paySomeone(Account debitor, Account creditor, String description, Double amount) throws NegativeAmountException, InsufficientBalanceException{
 		
 		if (!isPossiblePayment(debitor,amount)) {
@@ -46,7 +48,7 @@ public class PaymentManager {
 		return debitor.hasBalanceToPay(amount);
 	}
 	//TODO : ajouter les 5% au montant choisi
-	public Payment executePayment(Account debitor, Account creditor, String description, Double amount) throws NegativeAmountException{
+	public Payment executePayment(Account debitor, Account creditor, String description, Double amount) throws NegativeAmountException, InsufficientBalanceException{
 		//Prélèvement des frais de l'entreprise
 		Double amountCharged = ChargeFeesUtil.amountAfterCharge(amount);
 		//Création du Payment

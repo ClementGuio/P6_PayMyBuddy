@@ -13,6 +13,11 @@ public class AccountService {
 	
 	@Autowired
 	private AccountRepository repo;
+
+	
+	public boolean isExistingEmail(String email) {
+		return repo.existsByEmail(email);
+	}
 	
 	/**
 	 * Save an account or update it if already exists.

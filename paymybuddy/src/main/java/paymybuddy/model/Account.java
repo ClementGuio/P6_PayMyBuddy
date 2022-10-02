@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+
+import paymybuddy.exception.InsufficientBalanceException;
 
 @Entity
 @Table(name = "account")
@@ -20,6 +23,7 @@ public class Account {
 	private Integer accountId;
 	
 	//TODO : ne pas garder email et password en clair
+	@Email
 	@Column(name = "email")
 	private String email;
 	
@@ -81,7 +85,10 @@ public class Account {
 		return amount <= balance;
 	}
 	
-	public void withdrawMoney(Double amount) {
+	public void withdrawMoney(Double amount) throws InsufficientBalanceException{
+		if (balance < amount) {
+			throw new InsufficientBalanceException("You cannot withdraw more money than you have");
+		}
 		balance -= amount;
 	}
 	

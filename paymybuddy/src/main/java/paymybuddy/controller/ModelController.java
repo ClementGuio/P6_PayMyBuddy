@@ -48,7 +48,7 @@ public class ModelController {
 			model.addAttribute("friends",friendList);
 		}
 	}
-	
+	//TODO: get all payments sorted by date
 	@ModelAttribute
 	public void paymentsAsDebitor(Model model, Authentication auth){
 		logger.info("paymentsAsDebitor is called");
@@ -58,6 +58,15 @@ public class ModelController {
     		logger.info("paymentAsDebitor : "+debitorId);
     		model.addAttribute("payments",paymentService.getPaymentsWithDebitorId(debitorId));
     	}
+	}
+	
+	@ModelAttribute
+	public void userAccount(Model model, Authentication auth) {
+		logger.info("userAccount is called");
+		if (auth!=null) {
+			Account acc = accountService.getAccountWithEmail(auth.getName());
+			model.addAttribute("account", acc);
+		}
 	}
 	
 }

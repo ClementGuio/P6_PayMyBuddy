@@ -14,6 +14,11 @@ public class LinkUserService {
 	@Autowired
 	LinkUserRepository repo;
 	
+	
+	public boolean isExistingLinkUser(Integer accountId, Integer friendId) {
+		return repo.existsByAccountIdAndFriendId(accountId, friendId);
+	}
+	
 	/**
 	 * Save a linkUser.
 	 * @param linkUser

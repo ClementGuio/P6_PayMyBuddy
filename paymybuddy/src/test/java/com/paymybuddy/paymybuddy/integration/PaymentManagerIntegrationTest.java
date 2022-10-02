@@ -46,7 +46,7 @@ public class PaymentManagerIntegrationTest {
 	PaymentManager manager;
 
 	@Test
-	public void updateBDTest() {
+	public void updateBDTest() throws InsufficientBalanceException{
 		Account debitor = accountService.getAccountWithEmail("testone@email.com");
 		debitor.withdrawMoney(Double.valueOf(100));
 		Account creditor = accountService.getAccountWithEmail("testtwo@email.com");
