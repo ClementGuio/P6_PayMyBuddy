@@ -12,23 +12,32 @@
     </head>
     <body sec:authorize="isAuthenticated()">
         <header>
-        	<span id="logo">PayMyBuddy</span>
+        	<div id="logo">PayMyBuddy</div>
+        	
+        	<form id="logout" th:action="@{logout}" method="post">
+        		<button class="btn btn-primary" name="logout" value="logout">Logout</button>
+        	</form>
+        	<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/connection'|">Add connection</button>
+        	<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/index'|">Home</button>
+        	
         </header>
         
-        <form th:action="@{/executeDepositOrWithdraw}" th:object="${depositOrWithdrawForm}" method="post" >
-        	<div class="form-group">
-        		<input type="radio" th:field="*{action}" name="action" id="opt1" value="withdraw">Withdraw
-        		<input type="radio" th:field="*{action}" name="action" id="opt2" value="deposit">Deposit
-        	</div>
-        	<span th:if="${#fields.hasErrors('action')}" th:errors="*{action}">Name Error</span>
-  			<div class="form-group">
-    			<label for="Choose amount">Amount</label>
-    			<input th:field="*{amount}" type="number" class="form-control my-2 mx-2" placeholder="Amount">
-    			<span th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Name Error</span>
-  			</div>
-  			<button type="submit" class="btn btn-primary">Add Connection</button>
-		</form>
-		
+        <section id="bank">
+        	<div>Your balance : <span th:text="${account.balance}">Your balance</span> euros</div>
+	        <form th:action="@{/executeDepositOrWithdraw}" th:object="${depositOrWithdrawForm}" method="post" >
+	        	<div class="form-group">
+	        		<input type="radio" th:field="*{action}" name="action" id="opt1" value="withdraw">Withdraw
+	        		<input type="radio" th:field="*{action}" name="action" id="opt2" value="deposit">Deposit
+	        	</div>
+	        	<span id="error" th:if="${#fields.hasErrors('action')}" th:errors="*{action}">Name Error</span>
+	  			<div id="singleform" class="form-group">
+	    			<label for="Choose amount">Amount</label>
+	    			<input th:field="*{amount}" type="number" class="form-control my-2 mx-2" placeholder="Amount">
+	    			<span id="error" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Name Error</span>
+	  			</div>
+	  			<button type="submit" class="btn btn-primary">Confirm</button>
+			</form>
+		</section>
 		
     </body>
 </html>

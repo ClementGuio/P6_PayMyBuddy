@@ -1,7 +1,87 @@
+
+#error {
+	color: red;
+	float :left ;
+}
+
+#registrationform {
+	background-color: lightgrey;
+	padding-left:15px;
+	padding-right:15px;
+	padding-top:15px;
+	padding-bottom:60px;
+}
+
+#authenticationform {
+	background-color: lightgrey;
+	padding-left:15px;
+	padding-right:15px;
+	padding-top:15px;
+	padding-bottom:100px;
+}
+
+#select{
+	width: 20%;
+	height:100%;
+	margin-left: 1%;
+}
+#descr{
+	width:50%;
+	height:100%;
+	margin-left: 1%;
+}
+#amountPay{
+	width:15%;
+	height:100%;
+	margin-left: 1%;
+}
+#payform{
+	height:40px;
+}
+
+#paybtn {
+	height:100%;
+	width: 7%;
+}
+
+section {
+	margin-left : 15%;
+	margin-right : 15%;
+	margin-top: 7%;
+	border-radius: 10px;
+}
+
+#bank {
+	margin-left: 35%;
+	margin-right: 35%;
+	background-color: lightgrey;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 60px;
+	padding-top: 20px;
+}
+
+.btn {
+	background-color : green;
+	float : right;
+	padding: 10px;
+	border-color: green;
+	margin-right: 20px;
+}
+
+#singleform {
+	margin-left: 50%;
+	margin-bottom: 45px;
+}
+
 #logo {
 	background-color : #72BE53;
 	border-radius : 10px;
 	padding : 10px;
+	margin-left: 10px;
+	width: 120px;
+	align-self: center;
+	float:left;
 }
 
 header {

@@ -31,8 +31,6 @@ public class PaymentRepositoryTest {
 	@Autowired
 	PaymentRepository repo;
 	
-	
-	//TODO : créer données de test cohérentes
 	@Test
 	public void findAllTest() {
 		Payment a1 = new Payment(1000001,1000001,1000002,LocalDateTime.of(2020, 1, 1, 1, 0),null,Double.valueOf(5),Double.valueOf(1));

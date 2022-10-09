@@ -25,13 +25,7 @@ public class LinkUser {
 	private Integer friendId;
 
 	public LinkUser() {}
-	//TODO :virer les id des constructeurs?
-	/**
-	 * 
-	 * @param linkId
-	 * @param accountId
-	 * @param friendId
-	 */
+
 	public LinkUser(Integer linkId, Integer accountId, Integer friendId) {
 		super();
 		this.linkId = linkId;
@@ -54,7 +48,6 @@ public class LinkUser {
 			return false;
 		LinkUser other = (LinkUser) obj;
 		return Objects.equals(accountId, other.accountId) && Objects.equals(friendId, other.friendId);
-				// && Objects.equals(linkId, other.linkId);
 	}
 
 	public Integer getLinkId() {

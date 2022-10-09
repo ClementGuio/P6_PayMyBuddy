@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>PayMyBuddy App - Payment</title>
+        <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	  
+    	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="/styles.css">
+        
+    </head>
+    <body sec:authorize="isAuthenticated()">
+        <header>
+        	<div id="logo">PayMyBuddy</div>
+        	
+        	<form id="logout" th:action="@{logout}" method="post">
+        		<button class="btn btn-primary" name="logout" value="logout">Logout</button>
+        	</form>
+        	<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/index'|">Home</button>
+        	<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/depositOrWithdraw'|">Deposit/Withdraw money</button>
+        	
+        </header>
+        
+        <section id="authenticationform">
+			<!-- Form to add friend connection -->
+        	<form th:action="@{/addconnection}" th:object="${linkUserForm}" method="post" >
+  				<div class="form-group">
+    				<label for="inputEmail">Email address</label>
+    				<input th:field="*{email}" type="text" class="form-control my-2 mx-2" placeholder="Enter email">
+    				<span id="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</span>
+  				</div>
+  				<button type="submit" class="btn btn-primary">Add Connection</button>
+			</form>
+		</section>
+		
+    </body>
+</html>

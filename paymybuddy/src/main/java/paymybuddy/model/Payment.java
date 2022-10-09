@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "payment")
 public class Payment {
@@ -27,6 +29,7 @@ public class Payment {
 	private Integer creditorId;
 	
 	@Column(name = "pay_datetime")
+	@DateTimeFormat(pattern="dd-MM-yyyy hh:mm:ss")
 	LocalDateTime datetime;
 	
 	@Column(name = "description")
@@ -44,17 +47,7 @@ public class Payment {
 	private String debitorName;
 	
 	public Payment() {};
-	//TODO :virer les id des constructeurs
-	/**
-	 * 
-	 * @param paymentId
-	 * @param debitorId
-	 * @param creditorId
-	 * @param datetime
-	 * @param description
-	 * @param amount
-	 * @param companyFee
-	 */
+
 	public Payment(Integer paymentId, Integer debitorId, Integer creditorId, LocalDateTime datetime, String description,
 			Double amount, Double companyFee) {
 		super();

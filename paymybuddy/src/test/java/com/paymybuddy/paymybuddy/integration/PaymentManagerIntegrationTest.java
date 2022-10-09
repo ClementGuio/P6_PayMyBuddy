@@ -2,19 +2,13 @@ package com.paymybuddy.paymybuddy.integration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 
-import org.apache.commons.collections4.IterableUtils;
-import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -59,21 +53,21 @@ public class PaymentManagerIntegrationTest {
 		assertEquals(Double.valueOf(0),accountService.getAccountWithEmail("testone@email.com").getBalance());
 		assertEquals(Double.valueOf(200),accountService.getAccountWithEmail("testtwo@email.com").getBalance());
 	}
-		
+	
 	@Test
 	public void payAndSucceedTest() throws InsufficientBalanceException, NegativeAmountException{
 		Account debitor = accountService.getAccountWithEmail("testone@email.com");
 		Account creditor = accountService.getAccountWithEmail("testtwo@email.com");
 		
-		Payment payment = manager.paySomeone(debitor, creditor, "payAndSucceedTest", Double.valueOf(100));
+		Payment payment = manager.paySomeone(debitor, creditor, "payAndSucceedTest", Double.valueOf(50));
 		
 		Iterable<Payment> payments = paymentService.getAllPayments();
 		assertThat(payment).isNotNull();
 		assertThat(payments).contains(payment);
-		assertEquals(Double.valueOf(95),payment.getAmount());
-		assertEquals(Double.valueOf(5),payment.getCompanyFee());
-		assertEquals(Double.valueOf(0),debitor.getBalance());
-		assertEquals(Double.valueOf(195),creditor.getBalance());
+		assertEquals(Double.valueOf(50),payment.getAmount());
+		assertEquals(Double.valueOf(2.5),payment.getCompanyFee());
+		assertEquals(Double.valueOf(47.5),debitor.getBalance());
+		assertEquals(Double.valueOf(150),creditor.getBalance());
 	}
 
 	@Test

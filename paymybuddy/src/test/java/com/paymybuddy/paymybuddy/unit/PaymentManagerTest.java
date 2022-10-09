@@ -20,7 +20,7 @@ import paymybuddy.service.PaymentService;
 import paymybuddy.util.PayMyBuddyUtil.ChargeFeesUtil;
 
 public class PaymentManagerTest {
-	//TODO: mock des trucs
+	
 	@Mock
 	AccountService accountService;
 	
@@ -49,9 +49,10 @@ public class PaymentManagerTest {
 		assertEquals(debitor.getUserId(), payment.getDebitorId());
 		assertEquals(creditor.getUserId(), payment.getCreditorId());
 		assertEquals("executePayment test",payment.getDescription());
-		assertEquals(amount,payment.getAmount()+payment.getCompanyFee());
+		assertEquals(amount,payment.getAmount());
+		assertEquals(0.25,payment.getCompanyFee());
 	}
-	
+
 	@Test
 	public void executePaymentTestWithNegativeAmount() throws NegativeAmountException{
 		Account debitor = new Account(1,"debitor@email.com","pword",Double.valueOf(10),"firstname","lastname");

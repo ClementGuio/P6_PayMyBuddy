@@ -1,7 +1,6 @@
 package paymybuddy.model;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -14,7 +13,7 @@ public class PaymentFormDTO {
 	@NotBlank(message="Please choose an account.")
 	String creditorEmail;
 	
-	@Size(max=50, message="The size of the description must not exceed 50 characters.")
+	@Size(max=30, message="The size of the description must not exceed 30 characters.")
 	@NotBlank(message="Please enter a description.")
 	String description;
 	

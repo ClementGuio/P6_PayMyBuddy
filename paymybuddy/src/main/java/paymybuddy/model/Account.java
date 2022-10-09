@@ -17,12 +17,10 @@ import paymybuddy.exception.InsufficientBalanceException;
 public class Account {
 	
 	@Id
-	//TODO : à quoi sert @GeneratedValue
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer accountId;
 	
-	//TODO : ne pas garder email et password en clair
 	@Email
 	@Column(name = "email")
 	private String email;
@@ -41,16 +39,7 @@ public class Account {
 	
 	
 	public Account() {};
-	//TODO :virer les id des constructeurs
-	/**
-	 * 
-	 * @param accountId
-	 * @param email
-	 * @param password
-	 * @param balance
-	 * @param firstname
-	 * @param lastname
-	 */
+
 	public Account(Integer accountId, String email, String password, Double balance, String firstname, String lastname) {
 		super();
 		this.accountId = accountId;
@@ -70,7 +59,7 @@ public class Account {
 		if (getClass() != obj.getClass())
 			return false;
 		Account other = (Account) obj;
-		return /*Objects.equals(accountId, other.accountId) && */Objects.equals(balance, other.balance)
+		return Objects.equals(balance, other.balance)
 				&& Objects.equals(email, other.email) && Objects.equals(firstname, other.firstname)
 				&& Objects.equals(lastname, other.lastname) && Objects.equals(password, other.password);
 	}

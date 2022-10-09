@@ -12,5 +12,7 @@ public interface PaymentRepository extends CrudRepository<Payment,Integer>{
 	Iterable<Payment> findByCreditorId(Integer creditorId);
 	
 	Iterable<Payment> findByDebitorId(Integer debitorId);
+	
+	Iterable<Payment> findByCreditorIdOrDebitorId(Integer creditorId, Integer debitorId);
 
 }

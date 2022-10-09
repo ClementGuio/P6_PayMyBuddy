@@ -7,15 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import paymybuddy.model.Account;
 import paymybuddy.model.LinkUser;
 import paymybuddy.service.AccountService;
@@ -48,15 +42,15 @@ public class ModelController {
 			model.addAttribute("friends",friendList);
 		}
 	}
-	//TODO: get all payments sorted by date
+
 	@ModelAttribute
-	public void paymentsAsDebitor(Model model, Authentication auth){
-		logger.info("paymentsAsDebitor is called");
+	public void allPayments(Model model, Authentication auth){
+		logger.info("payments is called");
     	if (auth!=null) {
-    		logger.info("Load PaymentsAsDebitor : "+auth.getName());
-    		Integer debitorId = accountService.getAccountWithEmail(auth.getName()).getUserId();
-    		logger.info("paymentAsDebitor : "+debitorId);
-    		model.addAttribute("payments",paymentService.getPaymentsWithDebitorId(debitorId));
+    		logger.info("Load allPayments : "+auth.getName());
+    		Integer accountId = accountService.getAccountWithEmail(auth.getName()).getUserId();
+    		logger.info("allPayments : "+accountId);
+    		model.addAttribute("payments",paymentService.getAllPaymentsOf(accountId));
     	}
 	}
 	
@@ -67,6 +61,6 @@ public class ModelController {
 			Account acc = accountService.getAccountWithEmail(auth.getName());
 			model.addAttribute("account", acc);
 		}
-	}
+	} 
 	
 }

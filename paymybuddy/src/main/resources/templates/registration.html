@@ -8,29 +8,31 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-	<form th:action="@{/newAccount}" th:object="${accountForm}" method="post">
-		<div class="form-group">
-   			<label for="inputEmail">Email address</label>
-   			<input th:field="*{email}" type="text" class="form-control my-2 mx-2" placeholder="Enter email">
-   			<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</span>
-  		</div>
-  		<div class="form-group">
-   			<label for="inputPassword">Password</label>
-   			<input th:field="*{password}" type="text" class="form-control my-2 mx-2" placeholder="Enter password">
-  			<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</span>
-  		</div>
-  		<div class="form-group">
-   			<label for="inputFirstname">Firstname</label>
-   			<input th:field="*{firstname}" type="text" class="form-control my-2 mx-2" placeholder="Enter firstname">
-  			<span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Name Error</span>
-  		</div>
-  		<div class="form-group">
-   			<label for="inputLastname">Lastname</label>
-   			<input th:field="*{lastname}" type="text" class="form-control my-2 mx-2" placeholder="Enter lastname">
-  			<span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Name Error</span>
-  		</div>
-  		<button type="submit" class="btn btn-primary" >Create account</button>
-	</form>
+	<section id="registrationform">
+		<form th:action="@{/newAccount}" th:object="${accountForm}" method="post">
+			<div class="form-group">
+	   			<label for="inputEmail">Email address</label>
+	   			<input th:field="*{email}" type="text" class="form-control my-2 mx-2" placeholder="Enter email">
+	   			<span id="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</span>
+	  		</div>
+	  		<div class="form-group">
+	   			<label for="inputPassword">Password</label>
+	   			<input th:field="*{password}" type="password" class="form-control my-2 mx-2" placeholder="Enter password">
+	  			<span id="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</span>
+	  		</div>
+	  		<div class="form-group">
+	   			<label for="inputFirstname">Firstname</label>
+	   			<input th:field="*{firstname}" type="text" class="form-control my-2 mx-2" placeholder="Enter firstname">
+	  			<span id="error" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Name Error</span>
+	  		</div>
+	  		<div class="form-group">
+	   			<label for="inputLastname">Lastname</label>
+	   			<input th:field="*{lastname}" type="text" class="form-control my-2 mx-2" placeholder="Enter lastname">
+	  			<span id="error" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Name Error</span>
+	  		</div>
+	  		<button type="submit" class="btn btn-primary" >Create account</button>
+		</form>
+	</section>
 </body>
 </html>
 <!--

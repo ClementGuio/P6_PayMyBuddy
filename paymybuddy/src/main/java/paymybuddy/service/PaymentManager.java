@@ -1,6 +1,5 @@
 package paymybuddy.service;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import org.slf4j.Logger;
@@ -8,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import paymybuddy.controller.PayMyBuddyRestController;
 import paymybuddy.exception.InsufficientBalanceException;
 import paymybuddy.exception.NegativeAmountException;
 import paymybuddy.model.Account;
@@ -20,14 +18,11 @@ public class PaymentManager {
 	
 	Logger logger = LoggerFactory.getLogger(PaymentManager.class);
 	
-	//TODO: payment attgribut de la classe
 	@Autowired
 	AccountService accountService;
 	
 	@Autowired 
-	PaymentService paymentService;
-	
-	//TODO: revoir la gestion des exceptions
+	PaymentService paymentService; 
 	
 	public Payment paySomeone(Account debitor, Account creditor, String description, Double amount) throws NegativeAmountException, InsufficientBalanceException{
 		
@@ -47,15 +42,15 @@ public class PaymentManager {
 		}
 		return debitor.hasBalanceToPay(amount);
 	}
-	//TODO : ajouter les 5% au montant choisi
+
 	public Payment executePayment(Account debitor, Account creditor, String description, Double amount) throws NegativeAmountException, InsufficientBalanceException{
 		//Prélèvement des frais de l'entreprise
 		Double amountCharged = ChargeFeesUtil.amountAfterCharge(amount);
 		//Création du Payment
-		Payment payment = new Payment(null,debitor.getUserId(),creditor.getUserId(),LocalDateTime.now(),description,amountCharged,ChargeFeesUtil.companyFee(amount));
+		Payment payment = new Payment(null,debitor.getUserId(),creditor.getUserId(),LocalDateTime.now(),description,amount,ChargeFeesUtil.companyFee(amount));
 		//Update balances
-		debitor.withdrawMoney(amount);
-		creditor.addMoney(amountCharged);
+		debitor.withdrawMoney(amountCharged);
+		creditor.addMoney(amount);
 		 
 		return payment;
 	}

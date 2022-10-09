@@ -19,7 +19,7 @@ public class ChargeFeesUtilTest {
 	public void amountAfterChargeTest() throws NegativeAmountException{
 		Double chargedAmount = ChargeFeesUtil.amountAfterCharge(5.5);
 		
-		assertEquals(5.5*Fee.PERCENT_REMAINING_AFTER_FEE,chargedAmount);
+		assertEquals(5.5 + (5.5*Fee.PERCENT_FEE_CHARGED),chargedAmount);
 	}
 	
 	@Test

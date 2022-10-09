@@ -12,46 +12,62 @@
     </head>
     <body sec:authorize="isAuthenticated()">
         <header>
-        	<span id="logo">PayMyBuddy</span>
+        	<div id="logo">PayMyBuddy</div>
+        	
+        	<form id="logout" th:action="@{logout}" method="post">
+        		<button class="btn btn-primary" name="logout" value="logout">Logout</button>
+        	</form>
+        	<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/connection'|">Add connection</button>
+        	<button type="button" class="btn btn-primary" th:onclick="|window.location.href='/depositOrWithdraw'|">Deposit/Withdraw money</button>
+        	
         </header>
-        
-        <div>Your balance : <span th:text="${account.balance}">Your balance</span> euros</div>
-        
-        <button type="button" th:onclick="|window.location.href='/payment'|">Make a payment</button>
-        <button type="button" th:onclick="|window.location.href='/depositOrWithdraw'|">Deposit/Withdraw money</button>
 		
-		<!-- Form to add friend connection -->
-        <form th:action="@{/user/addconnection}" th:object="${linkUserForm}" method="post" >
-  			<div class="form-group">
-    			<label for="inputEmail">Email address</label>
-    			<input th:field="*{email}" type="text" class="form-control my-2 mx-2" placeholder="Enter email">
-    			<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</span>
-  			</div>
-  			<button type="submit" class="btn btn-primary">Add Connection</button>
-		</form>
+		<section>
+			<!-- Form to make a payment -->
+			<form id="payform" th:action="@{/executePayment}" th:object="${paymentForm}" method="post" >
+				<select id="select" class="form-select" th:field="*{creditorEmail}" >
+					<option value="0">Select friend</option>
+	  				<option th:each="creditor : ${friends}"
+	  						th:value=${creditor.email} 
+	  						th:text="${creditor.firstname + ' ' + creditor.lastname}"></option>
+				</select>
+				<span id="error" th:if="${#fields.hasErrors('creditorEmail')}" th:errors="*{creditorEmail}">Name Error</span>
+				
+				<input id="descr" type="text" th:field="*{description}" placeholder="Enter a description">
+				<span id="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Name Error</span>
+				
+				<input id="amountPay" type="number" th:field="*{amount}" placeholder="Choose ammount">
+				<span id="error" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Name Error</span>
+				
+				<button id="paybtn" class="btn btn-primary" name="Execute" type="submit">Pay</button>
+			</form>
 		
-		<!-- Payment history -->	
-		<table class="table">
-			<thead class="thead-light">
-				<tr>
-					<th class="text-left">From</th>
-					<th class="text-left">To</th>
-					<th class="text-left">Date</th>
-					<th class="text-left">Description</th>
-					<th class="text-left">value</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="payment : ${payments}">
-					<td th:text="${payment.creditorName}"></td>
-					<td th:text="${payment.debitorName}"></td>
-					<td th:text="${payment.datetime}"></td>
-					<td th:text="${payment.description}"></td>
-					<td th:text="${payment.amount}"></td>
-				</tr>
-			</tbody>
-		</table>
-		
+			<div>Your balance : <span th:text="${account.balance}">Your balance</span> euros</div>
+			
+			<!-- Payment history -->	
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th class="text-left">From</th>
+						<th class="text-left">To</th>
+						<th class="text-left">Date</th>
+						<th class="text-left">Description</th>
+						<th class="text-left">Amount</th>
+						<th class="text-left">Fee</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="payment : ${payments}">
+						<td th:text="${payment.creditorName}"></td>
+						<td th:text="${payment.debitorName}"></td>
+						<td th:text="${payment.datetime}"></td>
+						<td th:text="${payment.description}"></td>
+						<td th:text="${payment.amount}"></td>
+						<td th:text="${payment.companyFee}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
 		
     </body>
 </html>

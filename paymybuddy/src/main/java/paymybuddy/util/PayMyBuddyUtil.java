@@ -11,12 +11,14 @@ public final class PayMyBuddyUtil {
 
 	public static class ChargeFeesUtil{
 	
-		public static Double amountAfterCharge(Double amount) throws NegativeAmountException{
+		public static Double amountAfterCharge(Double amount) throws NegativeAmountException {
 			if (amount<0) {
 				throw new NegativeAmountException("Negative amount cannot be charged.");
 			}
-			return Fee.PERCENT_REMAINING_AFTER_FEE * amount;
+			
+			return amount + (amount * Fee.PERCENT_FEE_CHARGED);
 		}
+		 
 	
 		public static Double companyFee(Double amount) throws NegativeAmountException{
 			if (amount<0) {
