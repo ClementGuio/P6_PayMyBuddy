@@ -17,7 +17,8 @@
      
 ## Getting started
 
-    Before executing the program, you need to create the database (see below for diagram) by executing **SOURCE filepath/create_database.sql**. The database connection configuration is in *application.properties* file if you need to update username and password.
+    Before executing the program, you need to create the database (see below for diagram) 
+    by executing **SOURCE filepath/create_database.sql**. The database connection configuration is in               *application.properties* file if you need to update username and password.
 
 ### UML class diagram 
 ![Class diagram](./paymybuddyClass_diagram.png)
