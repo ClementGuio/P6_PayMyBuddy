@@ -2,7 +2,7 @@
 
 ## Pre-requisites
 
-* Java 11
+* Java 8
 * MySql 8
 
 ## Description
