@@ -40,7 +40,7 @@ import paymybuddy.service.PaymentService;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql(scripts = "../resources/setup_testDatabase.sql", executionPhase = BEFORE_TEST_METHOD)
 @Sql(scripts = "../resources/cleanup_testDatabase.sql", executionPhase = AFTER_TEST_METHOD)
-public class ModelControllerTest {
+public class ControllerTest {
 	
 	@Autowired
 	AccountService accountService;
@@ -67,7 +67,7 @@ public class ModelControllerTest {
 	@Test
 	@WithMockUser(username="testone@email.com")
 	public void postConnectionFormTest() throws Exception {
-		this.mockMvc.perform(post("/user/addconnection")
+		this.mockMvc.perform(post("/addconnection")
 			.param("email", "testthree@email.com")
 			.sessionAttr("linkUserForm", new LinkUserFormDTO())
 			.with(csrf()))
@@ -80,7 +80,7 @@ public class ModelControllerTest {
 	@Test
 	@WithMockUser(username="testone@email.com")
 	public void postConnectionFormWithBadEmailTest() throws Exception {
-		this.mockMvc.perform(post("/user/addconnection")
+		this.mockMvc.perform(post("/addconnection")
 			.param("email", "bad")
 			.sessionAttr("linkUserForm", new LinkUserFormDTO())
 			.with(csrf()))
@@ -94,7 +94,7 @@ public class ModelControllerTest {
 	@Test
 	@WithMockUser(username="testone@email.com")
 	public void postConnectionFormWithBlankEmailTest() throws Exception {
-		this.mockMvc.perform(post("/user/addconnection")
+		this.mockMvc.perform(post("/addconnection")
 			.param("email", "")
 			.sessionAttr("linkUserForm", new LinkUserFormDTO())
 			.with(csrf()))
@@ -108,7 +108,7 @@ public class ModelControllerTest {
 	@Test
 	@WithMockUser(username="testone@email.com")
 	public void postConnectionFormAlreadyLinkedTest() throws Exception {
-		this.mockMvc.perform(post("/user/addconnection")
+		this.mockMvc.perform(post("/addconnection")
 			.param("email", "testtwo@email.com")
 			.sessionAttr("linkUserForm", new LinkUserFormDTO())
 			.with(csrf()))
@@ -122,7 +122,7 @@ public class ModelControllerTest {
 	@Test
 	@WithMockUser(username="testone@email.com")
 	public void postConnectionFormUnknownEmailTest() throws Exception {
-		this.mockMvc.perform(post("/user/addconnection")
+		this.mockMvc.perform(post("/addconnection")
 			.param("email", "unknown@email.com")
 			.sessionAttr("linkUserForm", new LinkUserFormDTO())
 			.with(csrf()))

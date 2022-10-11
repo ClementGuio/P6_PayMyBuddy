@@ -58,8 +58,8 @@
 				</thead>
 				<tbody>
 					<tr th:each="payment : ${payments}">
-						<td th:text="${payment.creditorName}"></td>
 						<td th:text="${payment.debitorName}"></td>
+						<td th:text="${payment.creditorName}"></td>
 						<td th:text="${payment.datetime}"></td>
 						<td th:text="${payment.description}"></td>
 						<td th:text="${payment.amount}"></td>

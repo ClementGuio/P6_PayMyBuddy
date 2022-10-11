@@ -15,11 +15,11 @@ public class NewAccountFormDTO {
 	@NotBlank(message="Please enter a password")
 	String password;
 	
-	@Max(64)
+	@Size(max=64)
 	@NotBlank(message="Please enter your firstname")
 	String firstname;
 	
-	@Max(64)
+	@Size(max=64)
 	@NotBlank(message="Please enter your lastname")
 	String lastname;
 
